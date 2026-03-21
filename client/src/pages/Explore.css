@@ -1,0 +1,43 @@
+.explore { padding: 40px 0 80px; min-height: calc(100vh - 60px); }
+
+.explore-header { margin-bottom: 32px; }
+.explore-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 48px);
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+.explore-sub { font-size: 15px; color: var(--text-secondary); }
+
+.explore-filters {
+  display: flex; gap: 12px; margin-bottom: 32px; align-items: center;
+}
+.explore-search { flex: 1; }
+.explore-select { width: 160px; flex-shrink: 0; }
+
+.explore-loader { display: flex; justify-content: center; padding: 80px 0; }
+
+.users-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;
+}
+
+.user-card { display: flex; flex-direction: column; gap: 14px; }
+
+.uc-header { display: flex; align-items: center; gap: 14px; }
+.uc-info { display: flex; flex-direction: column; gap: 6px; }
+.uc-name { font-size: 16px; font-weight: 500; }
+
+.uc-details { display: flex; flex-direction: column; gap: 4px; }
+.uc-detail { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-secondary); }
+
+.uc-bio { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+
+.uc-actions { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+
+.pagination { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 40px; }
+.page-info { font-size: 14px; color: var(--text-secondary); }
+
+@media (max-width: 600px) {
+  .explore-filters { flex-wrap: wrap; }
+  .explore-select { width: 100%; }
+}

@@ -1,0 +1,45 @@
+.sponsorships { padding: 40px 0 80px; min-height: calc(100vh - 60px); }
+
+.spons-page-header { margin-bottom: 36px; }
+.spons-page-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 48px);
+  letter-spacing: 0.05em; margin-bottom: 8px;
+}
+.spons-page-sub { font-size: 15px; color: var(--text-secondary); }
+
+.spons-sections { display: flex; flex-direction: column; gap: 40px; }
+
+.spons-section-header {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 16px;
+}
+.spons-count {
+  font-size: 12px; color: var(--text-muted);
+  background: var(--bg-hover); padding: 2px 8px; border-radius: 100px;
+}
+
+.spons-cards {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 14px;
+}
+
+.spons-card { display: flex; flex-direction: column; gap: 14px; }
+
+.spons-card-header { display: flex; align-items: center; gap: 12px; }
+.spons-card-info { flex: 1; min-width: 0; }
+.spons-card-name { font-size: 15px; font-weight: 500; }
+.spons-card-meta { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+.spons-deal {
+  background: var(--bg-hover); border-radius: var(--radius-md); padding: 14px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.deal-title { font-size: 14px; font-weight: 500; }
+.deal-desc { font-size: 13px; color: var(--text-secondary); }
+.deal-value {
+  font-family: var(--font-display); font-size: 20px;
+  color: var(--accent); letter-spacing: 0.04em; margin-top: 4px;
+}
+
+.spons-notes { font-size: 13px; color: var(--text-muted); font-style: italic; }
+
+.spons-actions { display: flex; gap: 10px; }
