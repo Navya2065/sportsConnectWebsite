@@ -28,13 +28,30 @@ router.put('/:id', protect, async (req, res) => {
       await User.findByIdAndUpdate(req.user._id, { $addToSet: { following: req.params.id } });
       await User.findByIdAndUpdate(req.params.id, { $addToSet: { followers: req.user._id } });
 
-      // Create notification
-      await Notification.create({
+      // Create notification in DB
+      const notification = await Notification.create({
         recipient: req.params.id,
         sender: req.user._id,
         type: 'follow',
         message: `${req.user.name} started following you`,
       });
+
+      // Emit real-time notification via Socket.IO
+      if (global.io) {
+        global.io.to(`user_${req.params.id}`).emit('notification:new', {
+          _id: notification._id,
+          type: 'follow',
+          message: `${req.user.name} started following you`,
+          sender: {
+            _id: req.user._id,
+            name: req.user.name,
+            avatar: req.user.avatar,
+            role: req.user.role,
+          },
+          isRead: false,
+          createdAt: notification.createdAt,
+        });
+      }
     }
 
     res.json({ following: !isFollowing });

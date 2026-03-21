@@ -211,7 +211,7 @@ const PostCard = ({ post, currentUser, onLike, onComment, onShare, onApply, onDe
       {post.images?.length > 0 && (
         <div className={`post-images count-${Math.min(post.images.length, 3)}`}>
           {post.images.map((img, i) => (
-            <img key={i} src={`http://localhost:5000${img}`} alt="" className="post-img" />
+            <img key={i} src={img.startsWith('http') ? img : `http://localhost:5000${img}`} alt="" className="post-img" />
           ))}
         </div>
       )}

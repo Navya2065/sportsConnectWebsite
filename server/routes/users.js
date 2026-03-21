@@ -97,7 +97,7 @@ router.post('/avatar/upload', protect, upload.single('avatar'), async (req, res)
       return res.status(400).json({ message: 'No file uploaded' });
     }
 
-    const avatarUrl = `/uploads/${req.file.filename}`;
+    const avatarUrl = req.file.path || req.file.secure_url || `/uploads/${req.file.filename}`;
     const user = await User.findByIdAndUpdate(
       req.user._id,
       { avatar: avatarUrl },

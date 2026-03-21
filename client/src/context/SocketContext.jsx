@@ -19,7 +19,10 @@ export const SocketProvider = ({ children }) => {
       transports: ['websocket'],
     });
 
-    socketRef.current.on('connect', () => setIsConnected(true));
+    socketRef.current.on('connect', () => {
+      setIsConnected(true);
+      console.log('Socket connected');
+    });
     socketRef.current.on('disconnect', () => setIsConnected(false));
     socketRef.current.on('users:online', (users) => setOnlineUsers(users));
 
@@ -36,22 +39,40 @@ export const SocketProvider = ({ children }) => {
     socketRef.current?.on('message:receive', cb);
     return () => socketRef.current?.off('message:receive', cb);
   };
+
   const onTypingStart = (cb) => {
     socketRef.current?.on('typing:start', cb);
     return () => socketRef.current?.off('typing:start', cb);
   };
+
   const onTypingStop = (cb) => {
     socketRef.current?.on('typing:stop', cb);
     return () => socketRef.current?.off('typing:stop', cb);
+  };
+
+  // Listen for real-time notifications
+  const onNotification = (cb) => {
+    socketRef.current?.on('notification:new', cb);
+    return () => socketRef.current?.off('notification:new', cb);
   };
 
   const isOnline = (userId) => onlineUsers.includes(userId);
 
   return (
     <SocketContext.Provider value={{
-      socket: socketRef.current, isConnected, onlineUsers, isOnline,
-      joinConversation, leaveConversation, sendMessage,
-      emitTypingStart, emitTypingStop, onMessage, onTypingStart, onTypingStop,
+      socket: socketRef.current,
+      isConnected,
+      onlineUsers,
+      isOnline,
+      joinConversation,
+      leaveConversation,
+      sendMessage,
+      emitTypingStart,
+      emitTypingStop,
+      onMessage,
+      onTypingStart,
+      onTypingStop,
+      onNotification,
     }}>
       {children}
     </SocketContext.Provider>

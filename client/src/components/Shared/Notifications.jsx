@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../../utils/api';
+import { useSocket } from '../../context/SocketContext';
 import { formatDistanceToNow } from 'date-fns';
 import './Notifications.css';
 
@@ -19,6 +20,7 @@ const Notifications = () => {
   const [loading, setLoading] = useState(false);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
+  const { onNotification } = useSocket();
 
   const fetchNotifications = async () => {
     setLoading(true);
@@ -38,6 +40,18 @@ const Notifications = () => {
     const interval = setInterval(fetchNotifications, 30000);
     return () => clearInterval(interval);
   }, []);
+
+  // Listen for real-time notifications via Socket.IO
+  useEffect(() => {
+    if (!onNotification) return;
+    const unsub = onNotification((newNotif) => {
+      // Add new notification to top of list
+      setNotifications(prev => [newNotif, ...prev]);
+      // Increment unread count
+      setUnreadCount(prev => prev + 1);
+    });
+    return unsub;
+  }, [onNotification]);
 
   useEffect(() => {
     const handler = (e) => {

@@ -5,6 +5,9 @@ const User = require('../models/User');
 const onlineUsers = new Map();
 
 const socketHandlers = (io) => {
+  // Make io globally accessible for routes to emit notifications
+  global.io = io;
+
   // Authenticate socket connection using JWT
   io.use(async (socket, next) => {
     try {
@@ -29,6 +32,11 @@ const socketHandlers = (io) => {
     // Register user as online
     onlineUsers.set(userId, socket.id);
     io.emit('users:online', Array.from(onlineUsers.keys()));
+
+    // Join personal notification room
+    // This allows sending notifications directly to this user
+    socket.join(`user_${userId}`);
+    console.log(`${socket.user.name} joined personal room: user_${userId}`);
 
     // Join a conversation room
     socket.on('conversation:join', (conversationId) => {

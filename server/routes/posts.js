@@ -67,13 +67,30 @@ router.put('/:id/like', protect, async (req, res) => {
     } else {
       post.likes.push(req.user._id);
       if (post.author.toString() !== req.user._id.toString()) {
-        await Notification.create({
+        const notification = await Notification.create({
           recipient: post.author,
           sender: req.user._id,
           type: 'like',
           post: post._id,
           message: `${req.user.name} liked your post`,
         });
+        // Emit real-time notification
+        if (global.io) {
+          global.io.to(`user_${post.author}`).emit('notification:new', {
+            _id: notification._id,
+            type: 'like',
+            message: `${req.user.name} liked your post`,
+            sender: {
+              _id: req.user._id,
+              name: req.user.name,
+              avatar: req.user.avatar,
+              role: req.user.role,
+            },
+            post: post._id,
+            isRead: false,
+            createdAt: notification.createdAt,
+          });
+        }
       }
     }
     await post.save();
@@ -92,13 +109,30 @@ router.post('/:id/comment', protect, async (req, res) => {
     post.comments.push({ user: req.user._id, content: content.trim() });
     await post.save();
     if (post.author.toString() !== req.user._id.toString()) {
-      await Notification.create({
+      const notification = await Notification.create({
         recipient: post.author,
         sender: req.user._id,
         type: 'comment',
         post: post._id,
         message: `${req.user.name} commented on your post`,
       });
+      // Emit real-time notification
+      if (global.io) {
+        global.io.to(`user_${post.author}`).emit('notification:new', {
+          _id: notification._id,
+          type: 'comment',
+          message: `${req.user.name} commented on your post`,
+          sender: {
+            _id: req.user._id,
+            name: req.user.name,
+            avatar: req.user.avatar,
+            role: req.user.role,
+          },
+          post: post._id,
+          isRead: false,
+          createdAt: notification.createdAt,
+        });
+      }
     }
     const updated = await Post.findById(req.params.id).populate('comments.user', 'name avatar role');
     res.status(201).json({ comments: updated.comments });
@@ -141,13 +175,30 @@ router.put('/:id/apply', protect, async (req, res) => {
     if (post.applicants.includes(req.user._id)) return res.status(400).json({ message: 'Already applied' });
     post.applicants.push(req.user._id);
     await post.save();
-    await Notification.create({
+    const notification = await Notification.create({
       recipient: post.author,
       sender: req.user._id,
       type: 'apply',
       post: post._id,
       message: `${req.user.name} applied to your sponsorship opportunity`,
     });
+    // Emit real-time notification
+    if (global.io) {
+      global.io.to(`user_${post.author}`).emit('notification:new', {
+        _id: notification._id,
+        type: 'apply',
+        message: `${req.user.name} applied to your sponsorship opportunity`,
+        sender: {
+          _id: req.user._id,
+          name: req.user.name,
+          avatar: req.user.avatar,
+          role: req.user.role,
+        },
+        post: post._id,
+        isRead: false,
+        createdAt: notification.createdAt,
+      });
+    }
     res.json({ message: 'Applied successfully', applicants: post.applicants });
   } catch (error) {
     res.status(500).json({ message: error.message });

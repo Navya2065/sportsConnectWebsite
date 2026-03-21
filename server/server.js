@@ -15,10 +15,13 @@ const conversationRoutes = require('./routes/conversations');
 const messageRoutes = require('./routes/messages');
 const sponsorshipRoutes = require('./routes/sponsorships');
 const postRoutes = require('./routes/posts');
-// imports at top
+
 const followRoutes = require('./routes/follow');
 const notificationRoutes = require('./routes/notifications');
 const searchRoutes = require('./routes/search');
+const { apiLimiter, authLimiter } = require('./middleware/rateLimiter');
+
+
 
 
 // Connect to MongoDB
@@ -62,6 +65,10 @@ app.use('/api/posts', postRoutes);
 app.use('/api/follow', followRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/search', searchRoutes);
+
+app.use('/api/', apiLimiter);
+app.use('/api/auth/login', authLimiter);
+app.use('/api/auth/register', authLimiter);
 
 // Health check
 app.get('/api/health', (req, res) => {
