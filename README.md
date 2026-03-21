@@ -3,7 +3,7 @@
 > A full-stack sports sponsorship platform connecting athletes with sponsors — built with the MERN stack.
 
 ![SportsConnect Banner](https://img.shields.io/badge/MERN-Stack-c8f03d?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
+
 ![Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)
 
 ---
@@ -149,6 +149,4 @@ Visit **http://localhost:3000** 🚀
 
 > Built with ❤️ for the sports community
 
----
 
-> Built with ❤️ for the sports community
