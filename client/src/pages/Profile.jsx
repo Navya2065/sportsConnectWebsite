@@ -102,7 +102,7 @@ const Profile = () => {
 
   return (
     <>
-      <Navbar />
+     
       <div className="profile-page fade-in">
         <div className="container">
           <div className="profile-hero">

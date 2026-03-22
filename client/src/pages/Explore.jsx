@@ -92,7 +92,7 @@ const Explore = () => {
 
   return (
     <>
-      <Navbar />
+     
       <div className="explore fade-in">
         <div className="container">
           <div className="explore-header">

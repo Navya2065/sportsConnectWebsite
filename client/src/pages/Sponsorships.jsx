@@ -48,7 +48,7 @@ const Sponsorships = () => {
 
   return (
     <>
-      <Navbar />
+     
       <div className="sponsorships fade-in">
         <div className="container">
           <div className="spons-page-header">

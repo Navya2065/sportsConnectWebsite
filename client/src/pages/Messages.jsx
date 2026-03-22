@@ -137,7 +137,7 @@ const Messages = () => {
 
   return (
     <>
-      <Navbar />
+     
       <div className="messages-layout fade-in">
 
         {/* Sidebar */}

@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { useAuth } from '../context/AuthContext';
 import api from '../utils/api';
-import Navbar from '../components/Shared/Navbar';
+
 import { formatDistanceToNow } from 'date-fns';
 import toast from 'react-hot-toast';
 import './Feed.css';
@@ -373,7 +373,6 @@ const Feed = () => {
 
   return (
     <>
-      <Navbar />
       <div className="feed fade-in">
         <div className="feed-inner">
 

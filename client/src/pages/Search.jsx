@@ -76,7 +76,7 @@ const Search = () => {
 
   return (
     <>
-      <Navbar />
+    
       <div className="search-page fade-in">
         <div className="container">
           <div className="search-hero">
