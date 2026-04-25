@@ -15,6 +15,10 @@ import Sponsorships from './pages/Sponsorships';
 import Profile from './pages/Profile';
 import Feed from './pages/Feed';
 import Search from './pages/Search';
+import AthleteProfile from './pages/AthleteProfile';
+import Analytics  from './pages/Analytics';
+import Campaigns  from './pages/Campaigns';
+import Landing    from './pages/Landing';
 
 const App = () => {
   return (
@@ -91,8 +95,30 @@ const App = () => {
                   </AppLayout>
                 </ProtectedRoute>
               } />
+              <Route path="/athletes/:id" element={
+                <ProtectedRoute>
+                  <AppLayout title="Athlete Profile">
+                    <AthleteProfile />
+                  </AppLayout>
+                </ProtectedRoute>
+              } />
 
-              <Route path="/" element={<Navigate to="/dashboard" replace />} />
+              <Route path="/campaigns" element={
+                <ProtectedRoute>
+                  <AppLayout title="Campaigns">
+                    <Campaigns />
+                  </AppLayout>
+                </ProtectedRoute>
+              } />
+              <Route path="/analytics" element={
+                <ProtectedRoute>
+                  <AppLayout title="Analytics">
+                    <Analytics />
+                  </AppLayout>
+                </ProtectedRoute>
+              } />
+
+              <Route path="/" element={<Landing />} />
               <Route path="*" element={<Navigate to="/dashboard" replace />} />
             </Routes>
           </SocketProvider>

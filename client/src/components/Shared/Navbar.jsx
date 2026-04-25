@@ -19,6 +19,13 @@ const NAV_SECTIONS = [
     items: [
       { path: '/messages',     icon: '💬', label: 'Messages',     badge: true },
       { path: '/sponsorships', icon: '🤝', label: 'Sponsorships', badge: true },
+      { path: '/campaigns',    icon: '📣', label: 'Campaigns' },
+    ],
+  },
+  {
+    label: 'Insights',
+    items: [
+      { path: '/analytics', icon: '📈', label: 'Analytics' },
     ],
   },
   {

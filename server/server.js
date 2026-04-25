@@ -19,6 +19,10 @@ const postRoutes = require('./routes/posts');
 const followRoutes = require('./routes/follow');
 const notificationRoutes = require('./routes/notifications');
 const searchRoutes = require('./routes/search');
+const contractRoutes = require('./routes/contracts');
+const reviewRoutes    = require('./routes/reviews');
+const analyticsRoutes  = require('./routes/analytics');
+const campaignRoutes   = require('./routes/campaigns');
 const { apiLimiter, authLimiter } = require('./middleware/rateLimiter');
 
 
@@ -65,6 +69,10 @@ app.use('/api/posts', postRoutes);
 app.use('/api/follow', followRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/search', searchRoutes);
+app.use('/api/contracts', contractRoutes);
+app.use('/api/reviews',    reviewRoutes);
+app.use('/api/analytics', analyticsRoutes);
+app.use('/api/campaigns', campaignRoutes);
 
 app.use('/api/', apiLimiter);
 app.use('/api/auth/login', authLimiter);

@@ -1,0 +1,106 @@
+/* ─── Overlay ────────────────────────────────────────────────── */
+.rm-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.65);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  z-index: 1000;
+  display: flex; align-items: center; justify-content: center;
+  padding: 1rem;
+  animation: rm-fade 0.15s ease;
+}
+@keyframes rm-fade { from { opacity: 0; } to { opacity: 1; } }
+
+/* ─── Box ────────────────────────────────────────────────────── */
+.rm-box {
+  width: 100%; max-width: 480px;
+  border-radius: 20px; overflow: hidden;
+  display: flex; flex-direction: column;
+  animation: rm-up 0.22s cubic-bezier(0.34,1.56,0.64,1);
+  max-height: 92vh; overflow-y: auto;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.6), 0 0 0 1px var(--border-strong);
+}
+@keyframes rm-up { from { transform: translateY(28px) scale(0.96); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }
+
+/* ─── Header ─────────────────────────────────────────────────── */
+.rm-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 22px; border-bottom: 1px solid var(--border);
+  background: linear-gradient(135deg, var(--bg-card), rgba(245,158,11,0.03));
+  gap: 12px; flex-shrink: 0;
+}
+.rm-header-left { display: flex; align-items: center; gap: 10px; }
+.rm-icon  { font-size: 1.6rem; line-height: 1; }
+.rm-title { font-size: 1rem; font-weight: 700; color: var(--text); }
+.rm-sub   { font-size: 0.78rem; color: var(--text-secondary); margin-top: 2px; }
+.rm-close {
+  background: var(--bg-hover); border: 1px solid var(--border);
+  border-radius: 8px; padding: 6px 10px;
+  color: var(--text-secondary); cursor: pointer; font-size: 1rem;
+  transition: all var(--transition);
+}
+.rm-close:hover { background: var(--red-dim); color: var(--red); border-color: rgba(248,113,113,0.3); }
+
+/* ─── Body ───────────────────────────────────────────────────── */
+.rm-body { padding: 22px; display: flex; flex-direction: column; gap: 18px; }
+.rm-center { align-items: center; justify-content: center; min-height: 160px; }
+
+/* ─── Stars ──────────────────────────────────────────────────── */
+.rm-stars { display: flex; gap: 4px; }
+.rm-star {
+  font-size: 2.5rem; cursor: pointer;
+  color: var(--border); transition: color 0.1s, transform 0.1s;
+  user-select: none; line-height: 1;
+}
+.rm-star--active { color: var(--accent-gold); transform: scale(1.08); }
+.rm-star--readonly { cursor: default; font-size: 1.6rem; transform: none !important; }
+.rm-rating-hint { font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px; min-height: 1.2em; font-weight: 500; }
+.rm-rating-label { font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px; }
+
+/* ─── Sections ───────────────────────────────────────────────── */
+.rm-form-section, .rm-view-section { display: flex; flex-direction: column; gap: 8px; }
+.rm-section-label {
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--text-muted); margin: 0;
+}
+.rm-optional { font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--text-muted); }
+
+/* ─── Chips ──────────────────────────────────────────────────── */
+.rm-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.rm-chip {
+  padding: 4px 12px; border-radius: 100px;
+  font-size: 12px; font-weight: 500;
+  cursor: pointer; border: 1.5px solid var(--border);
+  background: var(--bg-hover); color: var(--text-secondary);
+  transition: all var(--transition); user-select: none;
+}
+.rm-chip:hover { border-color: var(--accent-gold); color: var(--accent-gold); }
+.rm-chip--selected {
+  background: rgba(245,158,11,0.15);
+  border-color: rgba(245,158,11,0.5);
+  color: var(--accent-gold);
+}
+
+/* ─── Textarea ───────────────────────────────────────────────── */
+.rm-textarea { resize: vertical; min-height: 90px; }
+.rm-char-count { font-size: 0.75rem; color: var(--text-muted); text-align: right; margin: 0; }
+
+/* ─── Already reviewed ───────────────────────────────────────── */
+.rm-already-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 14px;
+  background: var(--green-dim); color: var(--green);
+  border-radius: var(--radius-md); font-size: 13px; font-weight: 600;
+  border: 1px solid rgba(52,211,153,0.25);
+}
+
+/* ─── Read-only text ─────────────────────────────────────────── */
+.rm-review-text {
+  font-size: 0.9rem; color: var(--text); font-style: italic;
+  line-height: 1.6; padding: 12px 16px;
+  background: var(--bg-hover); border-radius: var(--radius-md);
+  border-left: 3px solid #f59e0b; margin: 0;
+}
+
+/* ─── Actions ────────────────────────────────────────────────── */
+.rm-actions { display: flex; justify-content: flex-end; gap: 10px; padding-top: 4px; }

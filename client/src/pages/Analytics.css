@@ -1,0 +1,129 @@
+.analytics { padding: 40px 0 80px; min-height: calc(100vh - var(--topbar-height)); }
+
+.an-loading, .an-error {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 14px; min-height: 40vh; color: var(--text-secondary);
+}
+.an-spinner {
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 3px solid var(--border); border-top-color: var(--accent);
+  animation: an-spin 0.8s linear infinite;
+}
+@keyframes an-spin { to { transform: rotate(360deg); } }
+
+.an-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 32px; gap: 16px; }
+.an-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 48px);
+  letter-spacing: 0.05em; margin-bottom: 6px; color: var(--text-primary);
+}
+.an-sub { font-size: 13px; color: var(--text-secondary); }
+.an-header-badge {
+  background: var(--accent-dim); color: var(--accent);
+  border: 1px solid rgba(255,77,0,0.3); border-radius: var(--radius-md);
+  padding: 6px 14px; font-size: 13px; font-weight: 600; white-space: nowrap;
+}
+
+/* KPI Grid */
+.an-kpi-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-bottom: 20px; }
+.an-kpi {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 22px 20px;
+  display: flex; align-items: flex-start; gap: 14px;
+  box-shadow: var(--shadow-card); transition: all var(--transition);
+  position: relative; overflow: hidden;
+}
+.an-kpi::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+}
+.an-kpi:hover { border-color: var(--border-strong); transform: translateY(-2px); }
+.an-kpi--accent { border-color: rgba(255,77,0,0.2); background: linear-gradient(135deg, var(--bg-card), rgba(255,77,0,0.04)); }
+.an-kpi-icon { font-size: 1.8rem; line-height: 1; flex-shrink: 0; }
+.an-kpi-value { font-family: var(--font-display); font-size: 28px; line-height: 1; color: var(--text-primary); }
+.an-kpi--accent .an-kpi-value { color: var(--accent); }
+.an-kpi-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-top: 4px; }
+.an-kpi-sub   { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+
+/* Section */
+.an-section { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 22px 20px; box-shadow: var(--shadow-card); }
+.an-section-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-muted); margin: 0 0 18px; }
+.an-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.an-full   { margin-bottom: 16px; }
+
+/* Donut */
+.an-donut-wrap { display: flex; align-items: center; gap: 28px; }
+.an-donut-svg  { width: 140px; height: 140px; flex-shrink: 0; }
+.an-donut-num  { font-family: var(--font-display); font-size: 22px; fill: var(--text-primary); font-weight: 700; }
+.an-donut-sub  { font-size: 11px; fill: var(--text-muted); }
+.an-donut-legend { display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.an-legend-item  { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+.an-legend-dot   { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.an-legend-label { flex: 1; color: var(--text-secondary); }
+.an-legend-val   { font-weight: 600; color: var(--text-primary); }
+
+/* Bar chart */
+.an-bar-chart { display: flex; align-items: flex-end; gap: 8px; height: 140px; padding-top: 8px; }
+.an-bar-col   { display: flex; flex-direction: column; align-items: center; flex: 1; gap: 4px; }
+.an-bar-track { flex: 1; width: 100%; display: flex; align-items: flex-end; background: var(--bg-hover); border-radius: 6px 6px 0 0; overflow: hidden; min-height: 80px; }
+.an-bar-fill  { width: 100%; border-radius: 6px 6px 0 0; animation: an-grow 0.6s ease forwards; transform-origin: bottom; }
+@keyframes an-grow { from { height: 0% !important; } }
+.an-bar-val   { font-size: 11px; font-weight: 600; color: var(--text-secondary); }
+.an-bar-label { font-size: 10px; color: var(--text-muted); }
+
+/* Progress */
+.an-progress-row { display: flex; flex-direction: column; gap: 5px; margin-bottom: 12px; }
+.an-progress-row:last-child { margin-bottom: 0; }
+.an-progress-meta  { display: flex; justify-content: space-between; }
+.an-progress-label { font-size: 13px; color: var(--text-secondary); }
+.an-progress-val   { font-size: 12px; font-weight: 600; color: var(--text-primary); }
+.an-progress-track { height: 6px; background: var(--bg-hover); border-radius: 100px; overflow: hidden; }
+.an-progress-fill  { height: 100%; border-radius: 100px; transition: width 0.7s cubic-bezier(0.34,1.56,0.64,1); }
+
+/* Profile score */
+.an-profile-score-wrap { display: flex; gap: 20px; align-items: flex-start; }
+.an-score-circle { width: 110px; height: 110px; flex-shrink: 0; }
+.an-score-circle svg { width: 100%; height: 100%; }
+.an-score-num    { font-family: var(--font-display); font-size: 18px; font-weight: 700; fill: var(--text-primary); }
+.an-score-hint   { font-size: 12px; color: var(--text-secondary); margin-bottom: 8px; }
+.an-score-items  { display: flex; flex-direction: column; gap: 3px; }
+.an-score-item   { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); }
+.an-score-pts    { color: var(--text-secondary); font-weight: 500; }
+
+/* Rating */
+.an-rating-block { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 16px; min-height: 120px; }
+.an-rating-big   { font-family: var(--font-display); font-size: 56px; line-height: 1; color: var(--text-primary); }
+.an-stars        { display: flex; gap: 2px; }
+.an-rating-count { font-size: 13px; color: var(--text-secondary); }
+.an-rating-note  { font-size: 12px; color: var(--text-muted); }
+
+/* Recent & Athletes */
+.an-recent-list   { display: flex; flex-direction: column; gap: 10px; }
+.an-recent-item   { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; background: var(--bg-hover); border-radius: var(--radius-md); gap: 12px; transition: background var(--transition); }
+.an-recent-item:hover { background: var(--bg-card); }
+.an-recent-left   { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.an-recent-name   { font-size: 13px; font-weight: 500; }
+.an-recent-deal   { font-size: 11px; color: var(--text-muted); }
+.an-recent-right  { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; flex-shrink: 0; }
+.an-recent-val    { font-size: 13px; font-weight: 700; color: var(--accent); }
+
+.an-avatar { border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); }
+.an-avatar--init { background: var(--accent-dim); color: var(--accent); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; }
+
+.an-sports-list { display: flex; flex-direction: column; }
+.an-top-athletes { display: flex; flex-direction: column; gap: 10px; }
+.an-athlete-row  { display: flex; align-items: center; gap: 14px; padding: 12px 14px; background: var(--bg-hover); border-radius: var(--radius-md); transition: all var(--transition); }
+.an-athlete-row:hover { background: var(--bg-card); transform: translateX(3px); }
+.an-athlete-rank { font-family: var(--font-display); font-size: 20px; color: var(--text-muted); width: 28px; }
+.an-athlete-info { flex: 1; min-width: 0; }
+.an-athlete-name { font-size: 14px; font-weight: 500; }
+.an-athlete-sport{ font-size: 12px; color: var(--text-muted); }
+.an-athlete-right{ display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+.an-athlete-val  { font-size: 14px; font-weight: 700; color: var(--accent); }
+.an-empty        { color: var(--text-muted); font-size: 13px; text-align: center; padding: 24px; }
+
+@media (max-width: 900px) {
+  .an-kpi-grid { grid-template-columns: 1fr 1fr; }
+  .an-grid-2   { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) { .an-kpi-grid { grid-template-columns: 1fr; } }

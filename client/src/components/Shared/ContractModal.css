@@ -1,0 +1,152 @@
+/* ─── Overlay ────────────────────────────────────────────────── */
+.cm-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.65);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  z-index: 1000;
+  display: flex; align-items: center; justify-content: center;
+  padding: 1rem;
+  animation: cm-fade 0.15s ease;
+}
+@keyframes cm-fade { from { opacity: 0; } to { opacity: 1; } }
+
+/* ─── Modal box ──────────────────────────────────────────────── */
+.cm-box {
+  width: 100%; max-width: 680px;
+  border-radius: 20px; overflow: hidden;
+  display: flex; flex-direction: column;
+  animation: cm-slide 0.22s cubic-bezier(0.34,1.56,0.64,1);
+  max-height: 92vh; overflow-y: auto;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.6), 0 0 0 1px var(--border-strong);
+}
+@keyframes cm-slide { from { transform: translateY(28px) scale(0.97); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }
+
+/* ─── Header ─────────────────────────────────────────────────── */
+.cm-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 24px; border-bottom: 1px solid var(--border);
+  background: linear-gradient(135deg, var(--bg-card), rgba(255,77,0,0.03));
+  gap: 12px; flex-shrink: 0;
+}
+.cm-header-left { display: flex; align-items: center; gap: 12px; }
+.cm-icon { font-size: 1.8rem; line-height: 1; }
+.cm-title { font-size: 1rem; font-weight: 700; color: var(--text); }
+.cm-sub   { font-size: 0.8rem; color: var(--text-secondary); margin-top: 2px; }
+.cm-header-right { display: flex; align-items: center; gap: 10px; }
+.cm-close {
+  background: var(--bg-hover); border: 1px solid var(--border);
+  border-radius: 8px; padding: 6px 10px;
+  color: var(--text-secondary); cursor: pointer; font-size: 1rem;
+  transition: all var(--transition);
+}
+.cm-close:hover { background: var(--red-dim); color: var(--red); border-color: rgba(248,113,113,0.3); }
+
+/* Status badges */
+.contract-badge {
+  display: inline-flex; align-items: center;
+  padding: 4px 10px; border-radius: 100px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.04em;
+}
+.contract-badge--yellow  { background: var(--yellow-dim); color: var(--yellow); border: 1px solid rgba(251,191,36,0.25); }
+.contract-badge--green   { background: var(--green-dim);  color: var(--green);  border: 1px solid rgba(52,211,153,0.25); }
+.contract-badge--red     { background: var(--red-dim);    color: var(--red);    border: 1px solid rgba(248,113,113,0.25); }
+.contract-badge--muted   { background: var(--bg-hover);   color: var(--text-muted); border: 1px solid var(--border); }
+
+/* ─── Body ───────────────────────────────────────────────────── */
+.cm-body { padding: 24px; display: flex; flex-direction: column; gap: 20px; }
+.cm-center { align-items: center; justify-content: center; min-height: 180px; }
+
+/* ─── Section label ──────────────────────────────────────────── */
+.cm-section-label {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 10px;
+}
+
+/* ─── Template selector ──────────────────────────────────────── */
+.cm-templates { display: flex; flex-direction: column; gap: 8px; }
+.cm-template {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 16px; border-radius: var(--radius-md);
+  border: 1.5px solid var(--border); background: var(--bg-input);
+  cursor: pointer; transition: all var(--transition);
+}
+.cm-template:hover { border-color: var(--border-strong); background: var(--bg-hover); }
+.cm-template--active {
+  border-color: var(--accent);
+  background: var(--accent-dim);
+  box-shadow: 0 0 0 3px var(--accent-dim);
+}
+.cm-template-icon { font-size: 1.5rem; flex-shrink: 0; }
+.cm-template-name { font-size: 14px; font-weight: 600; color: var(--text); }
+.cm-template-desc { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+.cm-template-check { margin-left: auto; font-size: 14px; color: var(--accent); font-weight: 700; width: 20px; text-align: center; }
+
+/* ─── Signature status ───────────────────────────────────────── */
+.cm-sig-status {
+  display: flex; align-items: center; gap: 12px;
+  padding: 16px; background: var(--bg-hover); border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+}
+.cm-sig-party {
+  flex: 1; display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px; border-radius: var(--radius-md);
+  border: 1px solid var(--border); background: var(--bg-card);
+  transition: all var(--transition);
+}
+.cm-sig-party.signed { border-color: rgba(52,211,153,0.35); background: var(--green-dim); }
+.cm-sig-party.pending { border-color: var(--border); }
+.cm-sig-check { font-size: 1.2rem; flex-shrink: 0; }
+.cm-sig-party.signed .cm-sig-check { color: var(--green); }
+.cm-sig-party.pending .cm-sig-check { color: var(--text-muted); }
+.cm-sig-role  { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); font-weight: 700; }
+.cm-sig-name  { font-size: 13px; font-weight: 600; color: var(--text); margin-top: 2px; }
+.cm-sig-date  { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+.cm-sig-arrow { font-size: 1.2rem; color: var(--text-muted); flex-shrink: 0; }
+
+/* ─── Preview iframe ─────────────────────────────────────────── */
+.cm-preview-wrap {
+  border: 1px solid var(--border); border-radius: var(--radius-md);
+  overflow: hidden; background: white;
+}
+.cm-preview-frame { width: 100%; height: 420px; border: none; display: block; }
+
+/* ─── Info box ───────────────────────────────────────────────── */
+.cm-info-box {
+  display: flex; gap: 8px; align-items: flex-start;
+  background: var(--blue-dim); border: 1px solid rgba(96,165,250,0.2);
+  border-radius: var(--radius-md); padding: 12px 14px;
+  font-size: 13px; color: var(--text-secondary); line-height: 1.5;
+}
+
+/* ─── Actions ────────────────────────────────────────────────── */
+.cm-actions { display: flex; justify-content: flex-end; gap: 10px; flex-wrap: wrap; }
+.cm-actions--view { justify-content: flex-start; }
+
+/* ─── Empty ──────────────────────────────────────────────────── */
+.cm-empty-icon { font-size: 3rem; opacity: 0.25; }
+.cm-empty-title { font-size: 16px; font-weight: 600; color: var(--text-secondary); }
+.cm-empty-sub   { font-size: 13px; color: var(--text-muted); text-align: center; max-width: 280px; }
+
+/* ─── Sign form ──────────────────────────────────────────────── */
+.cm-sign-header { text-align: center; display: flex; flex-direction: column; gap: 6px; align-items: center; }
+.cm-sign-icon   { font-size: 2.5rem; }
+.cm-sign-title  { font-size: 18px; font-weight: 700; }
+.cm-sign-sub    { font-size: 13px; color: var(--text-secondary); max-width: 320px; text-align: center; }
+.cm-sign-summary {
+  background: var(--bg-hover); border: 1px solid var(--border);
+  border-radius: var(--radius-md); overflow: hidden;
+}
+.cm-sign-row {
+  display: flex; justify-content: space-between; gap: 16px;
+  padding: 10px 16px; border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+.cm-sign-row:last-child { border-bottom: none; }
+.cm-sign-row span:first-child { color: var(--text-muted); font-weight: 600; }
+.cm-sign-row span:last-child  { color: var(--text); font-weight: 500; text-align: right; }
+.cm-sig-input { font-size: 16px !important; font-family: var(--font-display) !important; font-weight: 600 !important; }
+.cm-sign-legal {
+  font-size: 11px; color: var(--text-muted); line-height: 1.6;
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  padding: 10px 12px; background: var(--bg-hover);
+}
